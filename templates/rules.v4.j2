@@ -2,6 +2,10 @@
 :INPUT {{ firewall_ipv4_filter_input_policy }} [0:0]
 :FORWARD {{ firewall_ipv4_filter_forward_policy }} [0:0]
 :OUTPUT {{ firewall_ipv4_filter_output_policy }} [0:0]
+
+{% for rule in firewall_ipv4_filter_rules %}
+{{ rule }}
+{% endfor %}
 COMMIT
 
 *mangle
@@ -10,11 +14,18 @@ COMMIT
 :FORWARD {{ firewall_ipv4_mangle_forward_policy }} [0:0]
 :OUTPUT {{ firewall_ipv4_mangle_output_policy }} [0:0]
 :POSTROUTING {{ firewall_ipv4_mangle_postrouting_policy }} [0:0]
+
+{% for rule in firewall_ipv4_mangle_rules %}
+{{ rule }}
+{% endfor %}
 COMMIT
 
 *nat
 :PREROUTING {{ firewall_ipv4_nat_prerouting_policy }} [0:0]
 :POSTROUTING {{ firewall_ipv4_nat_postrouting_policy }} [0:0]
 :OUTPUT {{ firewall_ipv4_nat_output_policy }} [0:0]
-COMMIT
 
+{% for rule in firewall_ipv4_nat_rules %}
+{{ rule }}
+{% endfor %}
+COMMIT
