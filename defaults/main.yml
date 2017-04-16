@@ -1,0 +1,102 @@
+---
+firewall_manage_service: yes
+firewall_manage_ipv4_service: "{{ firewall_manage_service }}"
+firewall_manage_ipv6_service: "{{ firewall_manage_service }}"
+
+firewall_default_policy: DROP
+
+firewall_ipv4_default_policy: "{{ firewall_default_policy }}"
+
+firewall_ipv4_filter_default_policy: "{{ firewall_ipv4_default_policy }}"
+firewall_ipv4_filter_input_policy: "{{ firewall_ipv4_filter_default_policy }}"
+firewall_ipv4_filter_forward_policy: "{{ firewall_ipv4_filter_default_policy }}"
+firewall_ipv4_filter_output_policy: "{{ firewall_ipv4_filter_default_policy }}"
+
+firewall_ipv4_mangle_default_policy: "{{ firewall_ipv4_default_policy }}"
+firewall_ipv4_mangle_prerouting_policy: "{{ firewall_ipv4_mangle_default_policy }}"
+firewall_ipv4_mangle_input_policy: "{{ firewall_ipv4_mangle_default_policy }}"
+firewall_ipv4_mangle_forward_policy: "{{ firewall_ipv4_mangle_default_policy }}"
+firewall_ipv4_mangle_output_policy: "{{ firewall_ipv4_mangle_default_policy }}"
+firewall_ipv4_mangle_postrouting_policy: "{{ firewall_ipv4_mangle_default_policy }}"
+
+firewall_ipv4_nat_default_policy: "{{ firewall_ipv4_default_policy }}"
+firewall_ipv4_nat_prerouting_policy: "{{ firewall_ipv4_nat_default_policy }}"
+firewall_ipv4_nat_input_policy: "{{ firewall_ipv4_nat_default_policy }}"
+firewall_ipv4_nat_output_policy: "{{ firewall_ipv4_nat_default_policy }}"
+firewall_ipv4_nat_postrouting_policy: "{{ firewall_ipv4_nat_default_policy }}"
+
+firewall_ipv6_default_policy: "{{ firewall_default_policy }}"
+
+firewall_ipv6_filter_default_policy: "{{ firewall_ipv6_default_policy }}"
+firewall_ipv6_filter_input_policy: "{{ firewall_ipv6_filter_default_policy }}"
+firewall_ipv6_filter_forward_policy: "{{ firewall_ipv6_filter_default_policy }}"
+firewall_ipv6_filter_output_policy: "{{ firewall_ipv6_filter_default_policy }}"
+
+firewall_ipv6_mangle_default_policy: "{{ firewall_ipv6_default_policy }}"
+firewall_ipv6_mangle_prerouting_policy: "{{ firewall_ipv6_mangle_default_policy }}"
+firewall_ipv6_mangle_input_policy: "{{ firewall_ipv6_mangle_default_policy }}"
+firewall_ipv6_mangle_forward_policy: "{{ firewall_ipv6_mangle_default_policy }}"
+firewall_ipv6_mangle_output_policy: "{{ firewall_ipv6_mangle_default_policy }}"
+firewall_ipv6_mangle_postrouting_policy: "{{ firewall_ipv6_mangle_default_policy }}"
+
+firewall_ipv6_nat_default_policy: "{{ firewall_ipv6_default_policy }}"
+firewall_ipv6_nat_prerouting_policy: "{{ firewall_ipv6_nat_default_policy }}"
+firewall_ipv6_nat_input_policy: "{{ firewall_ipv6_nat_default_policy }}"
+firewall_ipv6_nat_output_policy: "{{ firewall_ipv6_nat_default_policy }}"
+firewall_ipv6_nat_postrouting_policy: "{{ firewall_ipv6_nat_default_policy }}"
+
+# Default rules are added to the end of the chain, so if you want to avoid
+# them you could add a custom rule for your traffic.
+firewall_ipv4_filter_input_rules_custom: []
+firewall_ipv4_filter_forward_rules_custom: []
+firewall_ipv4_filter_output_rules_custom: []
+
+firewall_ipv6_filter_input_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/filter/INPUT: "'
+firewall_ipv6_filter_forward_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/filter/FORWARD: "'
+firewall_ipv6_filter_output_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/filter/OUTPUT: "'
+firewall_ipv6_mangle_prerouting_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/mangle/PREROUTING: "'
+firewall_ipv6_mangle_input_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/mangle/INPUT: "'
+firewall_ipv6_mangle_forward_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/mangle/FORWARD: "'
+firewall_ipv6_mangle_output_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/mangle/OUTPUT: "'
+firewall_ipv6_mangle_postrouting_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/mangle/POSTROUTING: "'
+firewall_ipv6_nat_prerouting_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/nat/PREROUTING: "'
+firewall_ipv6_nat_input_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/nat/INPUT: "'
+firewall_ipv6_nat_output_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/nat/OUTPUT: "'
+firewall_ipv6_nat_postrouting_rules_default:
+  - '-p icmpv6 -j ACCEPT'
+  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/nat/POSTROUTING: "'
+
+firewall_ipv6_filter_input_rules_custom: []
+firewall_ipv6_filter_forward_rules_custom: []
+firewall_ipv6_filter_output_rules_custom: []
+firewall_ipv6_mangle_prerouting_rules_custom: []
+firewall_ipv6_mangle_input_rules_custom: []
+firewall_ipv6_mangle_forward_rules_custom: []
+firewall_ipv6_mangle_output_rules_custom: []
+firewall_ipv6_mangle_postrouting_rules_custom: []
+firewall_ipv6_nat_prerouting_rules_custom: []
+firewall_ipv6_nat_input_rules_custom: []
+firewall_ipv6_nat_output_rules_custom: []
+firewall_ipv6_nat_postrouting_rules_custom: []

@@ -1,0 +1,49 @@
+---
+- name: Install firewall packages
+  become: yes
+  package:
+    name: "{{ item }}"
+  with_items:
+    - iptables
+    - iptables-persistent
+
+- name: Configure rsyslog to capture firewall logs
+  template:
+    dest: /etc/rsyslog.d/iptables.conf
+    group: root
+    mode: u=wr,go=
+    owner: root
+    src: templates/rsyslog.conf.j2
+  notify:
+    - reload rsyslog
+
+- name: Ensure iptables config directory exists
+  become: yes
+  file:
+    group: root
+    mode: u=wrx,go=
+    owner: root
+    path: /etc/iptables
+    state: directory
+
+- name: Generate IPv4 rules
+  become: yes
+  template:
+    dest: /etc/iptables/rules.v4
+    group: root
+    mode: u=wr,go=
+    owner: root
+    src: templates/rules.v4.j2
+  notify:
+    - reload iptables
+
+- name: Generate IPv6 rules
+  become: yes
+  template:
+    dest: /etc/iptables/rules.v6
+    group: root
+    mode: u=wr,go=
+    owner: root
+    src: templates/rules.v6.j2
+  notify:
+    - reload ip6tables

@@ -1,0 +1,32 @@
+*filter
+:INPUT {{ firewall_ipv6_filter_input_policy }} [0:0]
+:FORWARD {{ firewall_ipv6_filter_forward_policy }} [0:0]
+:OUTPUT {{ firewall_ipv6_filter_output_policy }} [0:0]
+
+{% for rule in firewall_ipv6_filter_rules %}
+--ipv6 {{ rule }}
+{% endfor %}
+COMMIT
+
+*mangle
+:PREROUTING {{ firewall_ipv6_mangle_prerouting_policy }} [0:0]
+:INPUT {{ firewall_ipv6_mangle_input_policy }} [0:0]
+:FORWARD {{ firewall_ipv6_mangle_forward_policy }} [0:0]
+:OUTPUT {{ firewall_ipv6_mangle_output_policy }} [0:0]
+:POSTROUTING {{ firewall_ipv6_mangle_postrouting_policy }} [0:0]
+
+{% for rule in firewall_ipv6_mangle_rules %}
+--ipv6 {{ rule }}
+{% endfor %}
+COMMIT
+
+*nat
+:PREROUTING {{ firewall_ipv6_nat_prerouting_policy }} [0:0]
+:INPUT {{ firewall_ipv6_nat_input_policy }} [0:0]
+:OUTPUT {{ firewall_ipv6_nat_output_policy }} [0:0]
+:POSTROUTING {{ firewall_ipv6_nat_postrouting_policy }} [0:0]
+
+{% for rule in firewall_ipv6_nat_rules %}
+--ipv6 {{ rule }}
+{% endfor %}
+COMMIT

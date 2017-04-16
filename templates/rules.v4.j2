@@ -1,0 +1,20 @@
+*filter
+:INPUT {{ firewall_ipv4_filter_input_policy }} [0:0]
+:FORWARD {{ firewall_ipv4_filter_forward_policy }} [0:0]
+:OUTPUT {{ firewall_ipv4_filter_output_policy }} [0:0]
+COMMIT
+
+*mangle
+:PREROUTING {{ firewall_ipv4_mangle_prerouting_policy }} [0:0]
+:INPUT {{ firewall_ipv4_mangle_input_policy }} [0:0]
+:FORWARD {{ firewall_ipv4_mangle_forward_policy }} [0:0]
+:OUTPUT {{ firewall_ipv4_mangle_output_policy }} [0:0]
+:POSTROUTING {{ firewall_ipv4_mangle_postrouting_policy }} [0:0]
+COMMIT
+
+*nat
+:PREROUTING {{ firewall_ipv4_nat_prerouting_policy }} [0:0]
+:POSTROUTING {{ firewall_ipv4_nat_postrouting_policy }} [0:0]
+:OUTPUT {{ firewall_ipv4_nat_output_policy }} [0:0]
+COMMIT
+

@@ -1,0 +1,14 @@
+---
+- name: reload iptables
+  become: yes
+  shell: |-
+    iptables-restore -c < /etc/iptables/rules.v4
+  when:
+    - "{{ firewall_manage_ipv4_service }}"
+
+- name: reload ip6tables
+  become: yes
+  shell: |-
+    ip6tables-restore -c < /etc/iptables/rules.v6
+  when:
+    - "{{ firewall_manage_ipv6_service }}"
