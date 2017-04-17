@@ -47,46 +47,81 @@ firewall_ipv6_nat_postrouting_policy: "{{ firewall_ipv6_nat_default_policy }}"
 
 # Default rules are added to the end of the chain, so if you want to avoid
 # them you could add a custom rule for your traffic.
+
+firewall_ipv4_filter_input_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/filter/INPUT: "'
+firewall_ipv4_filter_forward_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/filter/FORWARD: "'
+firewall_ipv4_filter_output_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/filter/OUTPUT: "'
+firewall_ipv4_mangle_prerouting_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/mangle/PREROUTING: "'
+firewall_ipv4_mangle_input_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/mangle/INPUT: "'
+firewall_ipv4_mangle_forward_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/mangle/FORWARD: "'
+firewall_ipv4_mangle_output_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/mangle/OUTPUT: "'
+firewall_ipv4_mangle_postrouting_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/mangle/POSTROUTING: "'
+firewall_ipv4_nat_prerouting_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/nat/PREROUTING: "'
+firewall_ipv4_nat_input_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/nat/INPUT: "'
+firewall_ipv4_nat_output_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/nat/OUTPUT: "'
+firewall_ipv4_nat_postrouting_rules_default:
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/4/nat/POSTROUTING: "'
+
 firewall_ipv4_filter_input_rules_custom: []
 firewall_ipv4_filter_forward_rules_custom: []
 firewall_ipv4_filter_output_rules_custom: []
+firewall_ipv4_mangle_prerouting_rules_custom: []
+firewall_ipv4_mangle_input_rules_custom: []
+firewall_ipv4_mangle_forward_rules_custom: []
+firewall_ipv4_mangle_output_rules_custom: []
+firewall_ipv4_mangle_postrouting_rules_custom: []
+firewall_ipv4_nat_prerouting_rules_custom: []
+firewall_ipv4_nat_input_rules_custom: []
+firewall_ipv4_nat_output_rules_custom: []
+firewall_ipv4_nat_postrouting_rules_custom: []
 
 firewall_ipv6_filter_input_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/filter/INPUT: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/filter/INPUT: "'
 firewall_ipv6_filter_forward_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/filter/FORWARD: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/filter/FORWARD: "'
 firewall_ipv6_filter_output_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/filter/OUTPUT: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/filter/OUTPUT: "'
 firewall_ipv6_mangle_prerouting_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/mangle/PREROUTING: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/mangle/PREROUTING: "'
 firewall_ipv6_mangle_input_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/mangle/INPUT: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/mangle/INPUT: "'
 firewall_ipv6_mangle_forward_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/mangle/FORWARD: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/mangle/FORWARD: "'
 firewall_ipv6_mangle_output_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/mangle/OUTPUT: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/mangle/OUTPUT: "'
 firewall_ipv6_mangle_postrouting_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/mangle/POSTROUTING: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/mangle/POSTROUTING: "'
 firewall_ipv6_nat_prerouting_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/nat/PREROUTING: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/nat/PREROUTING: "'
 firewall_ipv6_nat_input_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/nat/INPUT: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/nat/INPUT: "'
 firewall_ipv6_nat_output_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/nat/OUTPUT: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/nat/OUTPUT: "'
 firewall_ipv6_nat_postrouting_rules_default:
   - '-p icmpv6 -j ACCEPT'
-  - '-m limit --limit 10/m --limit-burst 7 -j LOG --log-prefix "firewall/6/nat/POSTROUTING: "'
+  - '-m limit --limit 10/m --limit-burst 5 -j LOG --log-prefix "firewall/6/nat/POSTROUTING: "'
 
 firewall_ipv6_filter_input_rules_custom: []
 firewall_ipv6_filter_forward_rules_custom: []
