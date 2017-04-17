@@ -1,2 +1,3 @@
-:msg, contains, "] fw/" -/var/log/firewall.log
+$Template template_firewall,"%TIMESTAMP:::date-rfc3339% %hostname% %msg:R,ERE,1,DFLT:\[.*\] fw\/(.*)--end%\n"
+:msg, contains, "] fw/" -/var/log/firewall.log;template_firewall
 & ~
