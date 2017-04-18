@@ -4,7 +4,7 @@
 :OUTPUT {{ firewall_ipv4_filter_output_policy }} [0:0]
 
 {% for rule in firewall_ipv4_filter_rules %}
-{{ rule }}
+--ipv4 {{ rule }}
 {% endfor %}
 COMMIT
 
@@ -16,7 +16,7 @@ COMMIT
 :POSTROUTING {{ firewall_ipv4_mangle_postrouting_policy }} [0:0]
 
 {% for rule in firewall_ipv4_mangle_rules %}
-{{ rule }}
+--ipv4 {{ rule }}
 {% endfor %}
 COMMIT
 
@@ -26,6 +26,6 @@ COMMIT
 :OUTPUT {{ firewall_ipv4_nat_output_policy }} [0:0]
 
 {% for rule in firewall_ipv4_nat_rules %}
-{{ rule }}
+--ipv4 {{ rule }}
 {% endfor %}
 COMMIT
